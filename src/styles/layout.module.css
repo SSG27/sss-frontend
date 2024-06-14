@@ -2,12 +2,19 @@
 .body {
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
+  min-height: 110vh;
 }
 
 .main {
   flex: 1;
   padding: 20px;
-  margin-left: 220px; /* Adjusted for the wider sidebar */
+  margin-left: 100px;
+  margin-top: 0px; /* Adjusted for the wider sidebar */
   background-color: #1E1E2F;
+}
+
+.h1 {
+  font-size: 3rem;
+  color: #E1E1E6;
+  text-align: center;
 }

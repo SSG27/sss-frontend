@@ -9,3 +9,8 @@
     justify-content: space-between;
   }
   
+  .h1 {
+    font-size: 3rem;
+    color: #E1E1E6;
+    text-align: center;
+  }

@@ -37,7 +37,7 @@ const IndexPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Search Streaming Services by Country Code</h1>
+      <h1 className={styles.h1}>Search Streaming Services by Country Code</h1>
       <input
         type="text"
         placeholder="Enter country code"

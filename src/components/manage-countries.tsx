@@ -78,7 +78,7 @@ const ManageCountriesPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Manage Countries</h1>
+      <h1 className={styles.h1}>Manage Countries</h1>
       <div className={styles.inputContainer}>
         <input
           type="text"
@@ -98,7 +98,7 @@ const ManageCountriesPage = () => {
           value={newCountry.services}
           onChange={(e) => setNewCountry({ ...newCountry, services: e.target.value })}
         />
-        <button onClick={addCountry}>Add Country</button>
+        <button onClick={addCountry} className={styles.submitButton}>Add Country</button>
       </div>
       <ul>
         {countries.map((country: { code: string, country: string, services: number[] }) => (

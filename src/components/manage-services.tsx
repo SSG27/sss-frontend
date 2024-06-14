@@ -39,7 +39,7 @@ const ManageServicesPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Manage Streaming Services</h1>
+      <h1 className={styles.h1}>Manage Streaming Services</h1>
       <div className={styles.inputContainer}>
         <input
           type="text"
@@ -59,7 +59,7 @@ const ManageServicesPage = () => {
           value={newService.monthlyFee}
           onChange={(e) => setNewService({ ...newService, monthlyFee: e.target.value })}
         />
-        <button onClick={addService}>Add Service</button>
+        <button onClick={addService} className={styles.submitButton}>Add Service</button>
       </div>
       <ul>
         {services.map((service: { id: string, name: string, monthlyFee: string }) => (
