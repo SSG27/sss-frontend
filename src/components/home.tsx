@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import styles from '@/styles/Home.module.css';
 
 const IndexPage = () => {
   const [countryCode, setCountryCode] = useState('');
@@ -35,7 +36,7 @@ const IndexPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Search Streaming Services by Country Code</h1>
       <input
         type="text"
@@ -46,8 +47,9 @@ const IndexPage = () => {
       <button onClick={fetchServices}>Search</button>
       <ul>
         {services.map((service: { name: string, monthlyFee: number }, index: number) => (
-          <li key={index}>
-            {service.name} - {service.monthlyFee}
+          <li key={index} className={styles.serviceItem}>
+            <span>{service.name}</span>
+            <span>{service.monthlyFee}</span>
           </li>
         ))}
       </ul>

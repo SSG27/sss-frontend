@@ -1,0 +1,11 @@
+/* Home.module.css */
+.container {
+    padding: 20px;
+    margin-left: 220px; /* Adjusted for the wider sidebar */
+  }
+  
+  .serviceItem {
+    display: flex;
+    justify-content: space-between;
+  }
+  

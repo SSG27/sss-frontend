@@ -1,0 +1,28 @@
+/* Manage.module.css */
+.container {
+    padding: 20px;
+    margin-left: 220px; /* Adjusted for the wider sidebar */
+  }
+  
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .countryItem, .serviceItem {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .deleteButton {
+    background: none;
+    border: none;
+    color: #E1E1E6;
+    cursor: pointer;
+  }
+  
+  .deleteButton:hover {
+    color: #FF6E6E;
+  }
+  

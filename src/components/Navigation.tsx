@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import '@/styles/Navigation.css'
 
-const Navigation: React.FC = () => {
+const Navigation=() => {
   return (
     <nav className="nav">
         <Link href="/">

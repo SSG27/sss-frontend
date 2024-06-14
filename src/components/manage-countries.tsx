@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import styles from '@/styles/Manage.module.css';
 
 const ManageCountriesPage = () => {
   const [countries, setCountries] = useState([]);
@@ -76,9 +77,9 @@ const ManageCountriesPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Manage Countries</h1>
-      <div>
+      <div className={styles.inputContainer}>
         <input
           type="text"
           placeholder="Code"
@@ -101,9 +102,11 @@ const ManageCountriesPage = () => {
       </div>
       <ul>
         {countries.map((country: { code: string, country: string, services: number[] }) => (
-          <li key={country.code}>
-            {country.code} - {country.country} - Services: {country.services.join(', ')}
-            <button onClick={() => deleteCountry(country.code)}>
+          <li key={country.code} className={styles.countryItem}>
+            <span>{country.code}</span>
+            <span>{country.country}</span>
+            <span>Services: {country.services.join(', ')}</span>
+            <button onClick={() => deleteCountry(country.code)} className={styles.deleteButton}>
               <FontAwesomeIcon icon={faTrash} /> Delete
             </button>
           </li>

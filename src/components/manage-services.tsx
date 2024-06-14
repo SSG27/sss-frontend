@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import styles from '@/styles/Manage.module.css';
 
 const ManageServicesPage = () => {
   const [services, setServices] = useState([]);
@@ -37,9 +38,9 @@ const ManageServicesPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Manage Streaming Services</h1>
-      <div>
+      <div className={styles.inputContainer}>
         <input
           type="text"
           placeholder="ID"
@@ -62,9 +63,11 @@ const ManageServicesPage = () => {
       </div>
       <ul>
         {services.map((service: { id: string, name: string, monthlyFee: string }) => (
-          <li key={service.id}>
-            {service.id} - {service.name} - {service.monthlyFee}
-            <button onClick={() => deleteService(service.id)}>
+          <li key={service.id} className={styles.serviceItem}>
+            <span>{service.id}</span>
+            <span>{service.name}</span>
+            <span>{service.monthlyFee}</span>
+            <button onClick={() => deleteService(service.id)} className={styles.deleteButton}>
               <FontAwesomeIcon icon={faTrash} /> Delete
             </button>
           </li>
