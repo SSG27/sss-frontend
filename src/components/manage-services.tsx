@@ -6,9 +6,11 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/Manage.module.css';
 
 const ManageServicesPage = () => {
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState<{ id: string, name: string, monthlyFee: string }[]>([]);
   const [newService, setNewService] = useState({ id: '', name: '', monthlyFee: '' });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [deleteMessage, setDeleteMessage] = useState(''); // New state for delete message
 
   useEffect(() => {
     fetchServices();
@@ -71,19 +73,31 @@ const ManageServicesPage = () => {
 
     setNewService({ id: '', name: '', monthlyFee: '' });
     fetchServices();
+    setSuccess(`Service with name ${newService.name} successfully created!`);
+    setTimeout(() => setSuccess(''), 5000); // Clear success message after 5 seconds
   };
 
   const deleteService = async (id: string) => {
-    await fetch(`http://localhost:8000/services/${id}`, {
+    const response = await fetch(`http://localhost:8000/services/${id}`, {
       method: 'DELETE',
     });
-    fetchServices();
+
+    if (response.status >= 200 && response.status < 300) { // Check for any successful status code
+      const deletedService = services.find(service => service.id === id);
+      setServices(services.filter(service => service.id !== id)); // Update the state directly
+      setDeleteMessage(`Service with name ${deletedService?.name} successfully deleted!`);
+      setTimeout(() => setDeleteMessage(''), 5000); // Clear delete message after 5 seconds
+    } else {
+      setError('Error deleting service');
+    }
   };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Manage Streaming Services</h1>
       {error && <p className={styles.error}>{error}</p>}
+      {success && <p className={styles.success}>{success}</p>}
+      {deleteMessage && <p className={styles.deleteMessage}>{deleteMessage}</p>}
       <div className={styles.inputContainer}>
         <input
           type="text"

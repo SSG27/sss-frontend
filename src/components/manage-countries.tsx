@@ -6,9 +6,11 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/Manage.module.css';
 
 const ManageCountriesPage = () => {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState<{ code: string, country: string, services: number[] }[]>([]);
   const [newCountry, setNewCountry] = useState({ code: '', country: '', services: '' });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [deleteMessage, setDeleteMessage] = useState('');
 
   useEffect(() => {
     fetchCountries();
@@ -90,6 +92,8 @@ const ManageCountriesPage = () => {
 
       setNewCountry({ code: '', country: '', services: '' });
       fetchCountries();
+      setSuccess(`Country with code ${newCountry.code} successfully added!`);
+      setTimeout(() => setSuccess(''), 5000); // Clear success message after 5 seconds
     } catch (error) {
       console.error('Error adding country:', error);
       setError('An error occurred while adding the country.');
@@ -110,6 +114,9 @@ const ManageCountriesPage = () => {
       }
 
       fetchCountries();
+      const deletedCountry = countries.find((country) => country.code === code);
+      setDeleteMessage(`Country with code ${deletedCountry?.code} successfully deleted!`);
+      setTimeout(() => setDeleteMessage(''), 5000); // Clear delete message after 5 seconds
     } catch (error) {
       console.error('Error deleting country:', error);
       setError('An error occurred while deleting the country.');
@@ -120,6 +127,8 @@ const ManageCountriesPage = () => {
     <div className={styles.container}>
       <h1 className={styles.h1}>Manage Countries</h1>
       {error && <p className={styles.error}>{error}</p>}
+      {success && <p className={styles.success}>{success}</p>}
+      {deleteMessage && <p className={styles.deleteMessage}>{deleteMessage}</p>}
       <div className={styles.inputContainer}>
         <input
           type="text"
