@@ -1,65 +1,69 @@
 /* Manage.module.css */
 .container {
-    padding: 20px;
-    margin-left: 50px; /* Adjusted for the wider sidebar */
-  }
-  
-  .inputContainer {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    /* border: 1px solid #03b3ff;
-    border-radius: 4px; */
-    padding: 10px;
-    font-size: 1.5rem;
-  }
-
-  .inputContainer input {
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid #03b3ff;
-    border-radius: 4px;
-    font-size: 1.5rem;
-  }
-
-  .submitButton {
-    padding: 10px;
-    margin: 5px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    background-color: #03b3ff;
-    color: #e1e6e6;
-    cursor: pointer;
-  }
-  
-.submitButton:hover {
-    background-color: #3aceff;
+  padding: 20px;
+  margin-left: 50px; /* Adjusted for the wider sidebar */
 }
 
-  .countryItem, .serviceItem {
-    display: flex;
-    justify-content: space-between;
-    color: #03b3ff;
-    padding: 7px;
-    font-size: 1.5rem;
-  }
-  
-  .deleteButton {
-    background: none;
-    border: none;
-    color: #e1e6e6;
-    cursor: pointer;
-    font-size: 1.5rem;
-  }
-  
-  .deleteButton:hover {
-    color: #FF6E6E;
-  }
-  
-  .h1 {
-    font-size: 3rem;
-    color: #2997ff;;
-    text-align: center;
-  }
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+.inputContainer input {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #03b3ff;
+  border-radius: 4px;
+  font-size: 1.5rem;
+}
+
+.submitButton {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: #03b3ff;
+  color: #e1e6e6;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #3aceff;
+}
+
+.countryItem, .serviceItem {
+  display: flex;
+  justify-content: space-between;
+  color: #03b3ff;
+  padding: 7px;
+  font-size: 1.5rem;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: #e1e6e6;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.deleteButton:hover {
+  color: #FF6E6E;
+}
+
+.h1 {
+  font-size: 3rem;
+  color: #2997ff;
+  text-align: center;
+}
+
+.error {
+  color: red;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}

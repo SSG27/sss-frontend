@@ -8,6 +8,7 @@ import styles from '@/styles/Manage.module.css';
 const ManageCountriesPage = () => {
   const [countries, setCountries] = useState([]);
   const [newCountry, setNewCountry] = useState({ code: '', country: '', services: '' });
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchCountries();
@@ -23,9 +24,48 @@ const ManageCountriesPage = () => {
     }
   };
 
+  const validateCountry = () => {
+    const { code, country, services } = newCountry;
+
+    if (!code && !country && !services) {
+      setError('All fields (code, country, services) are required.');
+      return false;
+    }
+    if (!code && !country) {
+      setError('Both code and country are required.');
+      return false;
+    }
+    if (!code) {
+      setError('Code is required.');
+      return false;
+    }
+    if (!country) {
+      setError('Country is required.');
+      return false;
+    }
+    if (!services) {
+      setError('Services are required.');
+      return false;
+    }
+    if (!/^[A-Za-z]{2}$/.test(code)) {
+      setError('Code must be exactly two letters.');
+      return false;
+    }
+    if (!/^[a-zA-Z\s]+$/.test(country)) {
+      setError('Country must only contain letters and spaces.');
+      return false;
+    }
+    if (!/^(\d+\s*,\s*)*\d+$/.test(services)) {
+      setError('Services must be a comma-separated list of integers.');
+      return false;
+    }
+
+    setError('');
+    return true;
+  };
+
   const addCountry = async () => {
-    if (!newCountry.code || !newCountry.country || !newCountry.services) {
-      alert('Please fill in all fields.');
+    if (!validateCountry()) {
       return;
     }
 
@@ -44,7 +84,7 @@ const ManageCountriesPage = () => {
       if (!response.ok) {
         const errorData = await response.json();
         console.error('Error adding country:', errorData);
-        alert(`Error adding country: ${errorData.message || response.statusText}`);
+        setError(`Error adding country: ${errorData.message || response.statusText}`);
         return;
       }
 
@@ -52,7 +92,7 @@ const ManageCountriesPage = () => {
       fetchCountries();
     } catch (error) {
       console.error('Error adding country:', error);
-      alert('An error occurred while adding the country.');
+      setError('An error occurred while adding the country.');
     }
   };
 
@@ -65,20 +105,21 @@ const ManageCountriesPage = () => {
       if (!response.ok) {
         const errorData = await response.json();
         console.error('Error deleting country:', errorData);
-        alert(`Error deleting country: ${errorData.message || response.statusText}`);
+        setError(`Error deleting country: ${errorData.message || response.statusText}`);
         return;
       }
 
       fetchCountries();
     } catch (error) {
       console.error('Error deleting country:', error);
-      alert('An error occurred while deleting the country.');
+      setError('An error occurred while deleting the country.');
     }
   };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>Manage Countries</h1>
+      {error && <p className={styles.error}>{error}</p>}
       <div className={styles.inputContainer}>
         <input
           type="text"
