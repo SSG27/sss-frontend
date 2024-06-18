@@ -1,0 +1,117 @@
+[{
+  "_id": {
+    "$oid": "65b3ce13e2b6ade252ef4e13"
+  },
+  "id": "1",
+  "name": "Amazon Prime",
+  "monthlyFee": "£8.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c0831fa"
+  },
+  "id": "2",
+  "name": "all4",
+  "monthlyFee": "£3.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c0831fc"
+  },
+  "id": "3",
+  "name": "apple tv+",
+  "monthlyFee": "£6.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c0831fe"
+  },
+  "id": "4",
+  "name": "britbox",
+  "monthlyFee": "£5.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c083200"
+  },
+  "id": "5",
+  "name": "curiosity",
+  "monthlyFee": "$3.34",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c083202"
+  },
+  "id": "6",
+  "name": "disney",
+  "monthlyFee": "£7.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c083204"
+  },
+  "id": "7",
+  "name": "hotstar",
+  "monthlyFee": "£5.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c083206"
+  },
+  "id": "8",
+  "name": "iplayer",
+  "monthlyFee": "£0.00",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c083208"
+  },
+  "id": "9",
+  "name": "mubi",
+  "monthlyFee": "£10.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c08320a"
+  },
+  "id": "10",
+  "name": "netflix",
+  "monthlyFee": "£4.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c08320c"
+  },
+  "id": "11",
+  "name": "now tv",
+  "monthlyFee": "£9.99",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c08320e"
+  },
+  "id": "12",
+  "name": "paramount plus",
+  "monthlyFee": "£6.00",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65b3d6fc91345fc83c083210"
+  },
+  "id": "13",
+  "name": "zee5",
+  "monthlyFee": "₹0.99",
+  "__v": 0
+}]
