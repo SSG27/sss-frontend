@@ -51,6 +51,10 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
+    # DEBUGGING
+    - name: Debugging
+      run: sudo lsof -i -P -n | grep LISTEN
+
     # Run Playwright tests
     - name: Run Playwright tests
       run: npx playwright test
