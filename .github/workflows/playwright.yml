@@ -14,7 +14,7 @@ jobs:
       with:
         node-version: lts/*
 
-    # Install MongoDB tools for intereacting with the database
+    # Install MongoDB tools for interacting with the database
     - name: Install mongosh
       run: |
         sudo apt-get update
@@ -47,6 +47,16 @@ jobs:
       run: npm ci
       working-directory: ./backend
 
+    # Run backend linting
+    - name: Run Backend Lint
+      run: npm run lint
+      working-directory: ./backend
+
+    # Run backend Jest unit tests
+    - name: Run Backend Jest Tests
+      run: npx jest
+      working-directory: ./backend
+
     # Start the backend server
     - name: Start Backend
       run: npm start &
@@ -60,6 +70,10 @@ jobs:
     - name: Install Frontend Dependencies
       run: npm ci
 
+    # Run frontend linting
+    - name: Run Frontend Lint
+      run: npm run lint
+
     # Start the frontend server
     - name: Start Frontend
       run: npm run dev &
@@ -72,7 +86,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    # DEBUGGING
+    # Debugging
     - name: Debugging
       run: sudo lsof -i -P -n | grep LISTEN
 
