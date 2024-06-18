@@ -44,10 +44,10 @@ jobs:
 
     # Install backend dependencies
     - name: Install Backend Dependencies
-      run: npm ci
+      run: npm ci --legacy-peer-deps
       working-directory: ./backend
 
-    # Run backend linting
+    # Run backend lintin
     - name: Run Backend Lint
       run: npm run lint
       working-directory: ./backend
