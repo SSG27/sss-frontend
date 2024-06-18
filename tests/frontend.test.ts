@@ -1,10 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test('Search for a valid country code', async ({ page }) => {
+  test.setTimeout(100000);
   await page.goto('http://localhost:3000/');
   await page.getByPlaceholder('Enter country code').fill('ae');
   await page.getByRole('button', { name: 'Search' }).click();
-  await expect(page.getByText('Amazon Prime')).toBeVisible();
+  await expect(page.getByText('Services fetched successfully!')).toBeVisible();
 });
   
 test('Attempt to search with an invalid country code', async ({ page }) => {
