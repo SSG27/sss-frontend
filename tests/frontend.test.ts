@@ -44,14 +44,15 @@ test('Add country with valid data', async ({ page }) => {
 
 test('Delete the added country', async ({ page }) => { 
   await page.goto('http://localhost:3000/codes');
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(7000);
+  await page.goto('http://localhost:3000/services');
+  await page.goto('http://localhost:3000/codes');
   await page.locator('li').filter({ hasText: 'Some Country' }).getByRole('button').click();
   await expect(page.getByText('Country with code ab successfully deleted!')).toBeVisible();
 });
 
 test('Add a service with invalid data', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
-  await page.getByRole('link', { name: 'Services' }).click();
+  await page.goto('http://localhost:3000/services');
   await page.getByPlaceholder('ID').fill('122');
   await page.getByPlaceholder('Name').fill('a');
   await page.getByPlaceholder('Monthly Fee').fill('3 g');
@@ -69,7 +70,8 @@ test('Add service with valid data', async ({ page }) => {
 });
 
 test('Delete the added service', async ({ page }) => {
-  await page.goto('http://localhost:3000/services');  
+  await page.goto('http://localhost:3000/services');
+  await page.waitForTimeout(10000);
   await page.locator('li').filter({ hasText: '122' }).getByRole('button').click();
   await expect(page.getByText('Service with name a successfully deleted!')).toBeVisible();
   await page.getByRole('link', { name: 'Home' }).click();
