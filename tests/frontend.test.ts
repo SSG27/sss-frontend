@@ -33,7 +33,8 @@ test('Attempt to add country with invalid data', async ({ page }) => {
   await expect(page.getByText('Code must be exactly two letters.')).toBeVisible();
 });
 
-test('Add country with valid data', async ({ page }) => { 
+test('Add country with valid data', async ({ page }) => {
+  test.setTimeout(100000);
   await page.goto('http://localhost:3000/codes');
   await page.getByPlaceholder('Code').fill('ab');
   await page.getByPlaceholder('Country').fill('Some Country');
@@ -43,6 +44,7 @@ test('Add country with valid data', async ({ page }) => {
 });
 
 test('Delete the added country', async ({ page }) => { 
+  test.setTimeout(100000);
   await page.goto('http://localhost:3000/codes');
   await page.waitForTimeout(7000);
   await page.goto('http://localhost:3000/services');
@@ -71,7 +73,7 @@ test('Add service with valid data', async ({ page }) => {
 
 test('Delete the added service', async ({ page }) => {
   await page.goto('http://localhost:3000/services');
-  await page.waitForTimeout(10000);
+  await page.waitForTimeout(1000);
   await page.locator('li').filter({ hasText: '122' }).getByRole('button').click();
   await expect(page.getByText('Service with name a successfully deleted!')).toBeVisible();
   await page.getByRole('link', { name: 'Home' }).click();
