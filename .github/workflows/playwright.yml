@@ -13,12 +13,49 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - name: Install dependencies
+
+    # Clone the backend repository
+    - name: Checkout Backend Repository
+      uses: actions/checkout@v4
+      with:
+        repository: SSG27/EXPRESS-API
+        path: backend
+
+    # Install backend dependencies
+    - name: Install Backend Dependencies
       run: npm ci
+      working-directory: ./backend
+
+    # Start the backend server
+    - name: Start Backend
+      run: npm start &
+      working-directory: ./backend
+
+    # Wait for the backend to be ready (adjust the wait time as necessary)
+    - name: Wait for Backend to be Ready
+      run: sleep 30
+
+    # Install frontend dependencies
+    - name: Install Frontend Dependencies
+      run: npm ci
+
+    # Start the frontend server
+    - name: Start Frontend
+      run: npm run dev &
+      
+    # Wait for the frontend to be ready
+    - name: Wait for Frontend to be Ready
+      run: sleep 20
+
+    # Install Playwright browsers
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+
+    # Run Playwright tests
     - name: Run Playwright tests
       run: npx playwright test
+
+    # Upload Playwright report
     - uses: actions/upload-artifact@v4
       if: always()
       with:
