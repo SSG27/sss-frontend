@@ -10,38 +10,38 @@ jobs:
     name: SonarCloud
     runs-on: ubuntu-latest
     steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        - name: Set up Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: latest
-        # Clone the backend repository
-        - name: Checkout Backend Repository
-          uses: actions/checkout@v4
-          with:
-            repository: SSG27/EXPRESS-API
-            ref: 'main'
-            path: backend 
-            
-        - name: checking its in the repo
-          run: ls -la backend
-  
-        # Install backend dependencies
-        - name: Install Backend Dependencies
-          run: npm ci --legacy-peer-deps
-          working-directory: backend
-            
-        - uses: actions/checkout@v3
-          with:
-            fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+      # Clone the backend repository
+      - name: Checkout Backend Repository
+        uses: actions/checkout@v4
+        with:
+          repository: SSG27/EXPRESS-API
+          ref: "main"
+          path: backend
 
-        - name: jest test with coverage
-          run: npm run test --coverage
-          working-directory: backend
+      - name: checking its in the repo
+        run: ls -la backend
 
-        - name: SonarCloud Scan
-          uses: SonarSource/sonarcloud-github-action@master
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # Install backend dependencies
+      - name: Install Backend Dependencies
+        run: npm ci --legacy-peer-deps
+        working-directory: backend
+
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: jest test with coverage
+        run: npm run test --coverage
+        working-directory: backend
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
