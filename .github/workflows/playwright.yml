@@ -122,8 +122,8 @@ jobs:
       uses: SonarSource/sonarcloud-github-action@master
       with:
         args: >
-          -Dsonar.projectKey=your_project_key
-          -Dsonar.organization=your_organization
+          -Dsonar.projectKey=SSG27_sss-frontend
+          -Dsonar.organization=ssg27
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
           -Dsonar.javascript.lcov.reportPaths=coverage/playwright/lcov.info
