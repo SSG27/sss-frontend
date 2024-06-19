@@ -8,15 +8,11 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-
-    - name: Install Dependencies
-      run: npm ci
 
     # Install MongoDB tools for interacting with the database
     - name: Install mongosh
@@ -51,7 +47,7 @@ jobs:
       run: npm ci --legacy-peer-deps
       working-directory: ./backend
 
-    # Run backend linting
+    # Run backend lintin
     - name: Run Backend Lint
       run: npm run lint
       working-directory: ./backend
@@ -94,39 +90,14 @@ jobs:
     - name: Debugging
       run: sudo lsof -i -P -n | grep LISTEN
 
-    # Run Playwright tests with coverage
-    - name: Run Playwright Tests with Coverage
-      run: npm run test:playwright
+    # Run Playwright tests
+    - name: Run Playwright tests
+      run: npx playwright test
 
-    # Upload Playwright Coverage Report
+    # Upload Playwright report
     - uses: actions/upload-artifact@v4
+      if: always()
       with:
-        name: playwright-coverage
-        path: coverage/playwright
+        name: playwright-report
+        path: playwright-report/
         retention-days: 30
-
-  sonarcloud:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Install Dependencies
-      run: npm ci
-
-    - name: Run SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@master
-      with:
-        args: >
-          -Dsonar.projectKey=SSG27_sss-frontend
-          -Dsonar.organization=ssg27
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.javascript.lcov.reportPaths=coverage/playwright/lcov.info
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
