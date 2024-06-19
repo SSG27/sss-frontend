@@ -5,37 +5,42 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
+
     steps:
-        # Clone the backend repository
-        - name: Checkout Backend Repository
-          uses: actions/checkout@v4
-          with:
-            repository: SSG27/EXPRESS-API
-            ref: 'main'
-            path: spider
-            
-        - name: checking its in the repo
-          run: ls -la spider
-  
-        # Install backend dependencies
-        - name: Install Backend Dependencies
-          run: npm ci --legacy-peer-deps
-          working-directory: spider
-            
-        - uses: actions/checkout@v3
-          with:
-            fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+    # Checkout the backend repository
+    - name: Checkout Backend Repository
+      uses: actions/checkout@v4
+      with:
+        repository: SSG27/EXPRESS-API
+        ref: 'main'
+        path: spider
 
-        - name: jest test with coverage
-          run: npm run test -- --coverage
-          working-directory: spider
+    - name: Checking it's in the repo
+      run: ls -la spider
 
-        - name: SonarCloud Scan
-          uses: SonarSource/sonarcloud-github-action@master
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    # Install backend dependencies
+    - name: Install Backend Dependencies
+      run: npm ci --legacy-peer-deps
+      working-directory: ./spider
+
+    # Fetch full history for SonarCloud
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+    # Run jest tests with coverage
+    - name: Jest test with coverage
+      run: npm run test -- --coverage
+      working-directory: ./spider
+
+    # SonarCloud Scan
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
