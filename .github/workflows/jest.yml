@@ -16,7 +16,10 @@ jobs:
           with:
             repository: SSG27/EXPRESS-API
             ref: 'main'
-            path: backend
+            path: backend 
+            
+        - name: checking its in the repo
+          run: ls -la backend
   
         # Install backend dependencies
         - name: Install Backend Dependencies
