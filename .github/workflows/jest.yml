@@ -20,7 +20,7 @@ jobs:
         # Install backend dependencies
         - name: Install Backend Dependencies
           run: npm ci --legacy-peer-deps
-          working-directory: backend
+          working-directory: ../backend
             
         - uses: actions/checkout@v3
           with:
@@ -28,7 +28,7 @@ jobs:
 
         - name: jest test with coverage
           run: npm run test -- --coverage
-          working-directory: backend
+          working-directory: ../backend
 
         - name: SonarCloud Scan
           uses: SonarSource/sonarcloud-github-action@master
