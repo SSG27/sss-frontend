@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "test:playwright": "nyc --reporter=lcov --report-dir=coverage/playwright npx playwright test"
+    "lint": "next lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -18,17 +17,12 @@
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/preset-env": "^7.24.7",
     "@playwright/test": "^1.44.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "babel-plugin-istanbul": "^6.1.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
-    "nyc": "^17.0.0",
-    "playwright": "^1.44.1",
     "typescript": "^5"
   }
 }
