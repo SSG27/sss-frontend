@@ -1,15 +1,19 @@
 name: Github Actions Pipeline
+
 on:
   push:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
+
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
@@ -23,6 +27,7 @@ jobs:
         echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
         sudo apt-get update
         sudo apt-get install -y mongodb-mongosh mongodb-org-tools
+
     # MongoDB setup
     - name: MongoDB Setup
       uses: supercharge/mongodb-github-action@v1
@@ -46,7 +51,7 @@ jobs:
       run: npm ci --legacy-peer-deps
       working-directory: ./backend
 
-    # Run backend lintin
+    # Run backend linting
     - name: Run Backend Lint
       run: npm run lint
       working-directory: ./backend
@@ -56,14 +61,13 @@ jobs:
       run: npx jest --coverage
       working-directory: ./backend
 
-    # Start the backend server
-    - name: Start Backend
-      run: npm start &
-      working-directory: ./backend
-
-    # Wait for the backend to be ready (adjust the wait time as necessary)
-    - name: Wait for Backend to be Ready
-      run: sleep 30
+    # Build and push backend Docker image
+    - name: Build and Push Backend Docker Image
+      run: |
+        docker build -t sss-backend:latest ./backend
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        docker tag sss-backend:latest ${{ secrets.DOCKER_USERNAME }}/sss-backend:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/sss-backend:latest
 
     # Install frontend dependencies
     - name: Install Frontend Dependencies
@@ -73,10 +77,26 @@ jobs:
     - name: Run Frontend Lint
       run: npm run lint
 
-    # Start the frontend server
-    - name: Start Frontend
-      run: npm run dev &
-      
+    # Build and push frontend Docker image
+    - name: Build and Push Frontend Docker Image
+      run: |
+        docker build -t sss-frontend:latest .
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        docker tag sss-frontend:latest ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
+
+    # Start the backend container
+    - name: Start Backend Container
+      run: docker run -d -p 8000:8000 --name sss-backend ${{ secrets.DOCKER_USERNAME }}/sss-backend:latest
+
+    # Wait for the backend to be ready
+    - name: Wait for Backend to be Ready
+      run: sleep 20
+
+    # Start the frontend container
+    - name: Start Frontend Container
+      run: docker run -d -p 3000:3000 --name sss-frontend ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
+
     # Wait for the frontend to be ready
     - name: Wait for Frontend to be Ready
       run: sleep 20
