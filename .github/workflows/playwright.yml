@@ -30,9 +30,9 @@ jobs:
         mongodb-version: latest
 
     - name: Load posts into MongoDB
-      run: mongoimport --uri mongodb://localhost:27017/country-code --collection codes --file ./mongo/country-code.codes.json --jsonArray
+      run: mongoimport --uri mongodb+srv://ghandhisanju:xQQYzwr8vlzvIWoT@sss.y1krw0v.mongodb.net/country-code?retryWrites=true&w=majority&appName=SSS --collection codes --file ./mongo/country-code.codes.json --jsonArray
     - name: Load users into MongoDB
-      run: mongoimport --uri mongodb://localhost:27017/country-code --collection streamingservices --file ./mongo/country-code.streamingservices.json --jsonArray
+      run: mongoimport --uri mongodb+srv://ghandhisanju:xQQYzwr8vlzvIWoT@sss.y1krw0v.mongodb.net/country-code?retryWrites=true&w=majority&appName=SSS --collection streamingservices --file ./mongo/country-code.streamingservices.json --jsonArray
 
     # Clone the backend repository
     - name: Checkout Backend Repository
@@ -53,7 +53,7 @@ jobs:
 
     # Wait for the backend to be ready (adjust the wait time as necessary)
     - name: Wait for Backend to be Ready
-      run: sleep 30
+      run: sleep 15
 
     # Install frontend dependencies
     - name: Install Frontend Dependencies
@@ -69,11 +69,11 @@ jobs:
       
     # Wait for the frontend to be ready
     - name: Wait for Frontend to be Ready
-      run: sleep 20
+      run: sleep 15
 
-    # Install Playwright browsers
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+    # Install Playwright browser
+    - name: Install Chromium Playwright Browser
+      run: npx playwright install chromium --with-deps
 
     # Debugging
     - name: Debugging
