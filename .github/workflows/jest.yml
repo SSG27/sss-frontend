@@ -1,4 +1,4 @@
-name: Build
+name: Backend Jest Tests + SonarCloud Scan
 on:
   push:
     branches:
