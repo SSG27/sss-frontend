@@ -34,14 +34,14 @@ jobs:
       env:
         MONGO_URI: ${{ secrets.MONGO_URI }}
       run: |
-        mongoimport --uri "${MONGO_URI}" --collection codes --file ./mongo/country-code.codes.json --jsonArray
+        mongoimport --uri "${{ secrets.MONGO_URI }}" --collection codes --file ./mongo/country-code.codes.json --jsonArray
 
     # Load services into MongoDB
     - name: Load services into MongoDB
       env:
         MONGO_URI: ${{ secrets.MONGO_URI }}
       run: |
-        mongoimport --uri "${MONGO_URI}" --collection streamingservices --file ./mongo/country-code.streamingservices.json --jsonArray
+        mongoimport --uri "${{ secrets.MONGO_URI }}" --collection streamingservices --file ./mongo/country-code.streamingservices.json --jsonArray
 
     # Clone the backend repository
     - name: Checkout Backend Repository

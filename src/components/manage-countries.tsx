@@ -150,7 +150,13 @@ const ManageCountriesPage = () => {
         />
         <button onClick={addCountry} className={styles.submitButton}>Add Country</button>
       </div>
-      <ul>
+      <ul className={styles.list}>
+        <li className={styles.listHeader}>
+          <span>Code</span>
+          <span>Country</span>
+          <span>Services</span>
+          <span>Actions</span>
+        </li>
         {countries.map((country: { code: string, country: string, services: number[] }) => (
           <li key={country.code} className={styles.countryItem}>
             <span>{country.code}</span>

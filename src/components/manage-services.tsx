@@ -10,7 +10,7 @@ const ManageServicesPage = () => {
   const [newService, setNewService] = useState({ id: '', name: '', monthlyFee: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [deleteMessage, setDeleteMessage] = useState(''); // New state for delete message
+  const [deleteMessage, setDeleteMessage] = useState('');
 
   useEffect(() => {
     fetchServices();
@@ -119,7 +119,13 @@ const ManageServicesPage = () => {
         />
         <button className={styles.submitButton} onClick={addService}>Add Service</button>
       </div>
-      <ul>
+      <ul className={styles.list}>
+        <li className={styles.listHeader}>
+          <span>ID</span>
+          <span>Name</span>
+          <span>Monthly Fee</span>
+          <span>Actions</span>
+        </li>
         {services.map((service: { id: string, name: string, monthlyFee: string }) => (
           <li key={service.id} className={styles.serviceItem}>
             <span>{service.id}</span>

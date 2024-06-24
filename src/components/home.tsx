@@ -54,7 +54,11 @@ const IndexPage = () => {
         />
         <button onClick={fetchServices} className={styles.submitButton}>Search</button>
       </div>
-      <ul>
+      <ul className={styles.list}>
+        <li className={styles.listHeader}>
+          <span>Service Name</span>
+          <span>Monthly Fee</span>
+        </li>
         {services.map((service, index) => (
           <li key={index} className={styles.serviceItem}>
             <span>{service.name}</span>
