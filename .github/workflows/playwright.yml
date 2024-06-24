@@ -51,16 +51,6 @@ jobs:
       run: npm ci --legacy-peer-deps
       working-directory: ./backend
 
-    # Run backend linting
-    - name: Run Backend Lint
-      run: npm run lint
-      working-directory: ./backend
-
-    # Run backend Jest unit tests with coverage
-    - name: Run Backend Jest Tests
-      run: npx jest --coverage
-      working-directory: ./backend
-
     # Build and push backend Docker image
     - name: Build and Push Backend Docker Image
       run: |

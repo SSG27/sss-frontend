@@ -35,6 +35,11 @@ jobs:
       run: npm ci --legacy-peer-deps
       working-directory: ./spider
 
+    # Run backend linting
+    - name: Run Backend Lint
+      run: npm run lint
+      working-directory: ./spider
+
     # Jest test with coverage
     - name: Jest test with coverage
       run: npm run test -- --coverage
