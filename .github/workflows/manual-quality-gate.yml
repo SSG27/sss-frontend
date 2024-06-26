@@ -15,7 +15,7 @@ jobs:
     - name: Check for updates from upstream
       id: check_updates
       run: |
-        git remote add upstream https://github.com/owner/repo.git
+        git remote add upstream https://github.com/SSG27/sss-frontend.git
         git fetch upstream
         UPSTREAM_COMMIT=$(git rev-parse upstream/main)
         CURRENT_COMMIT=$(git rev-parse HEAD)
