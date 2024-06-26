@@ -18,7 +18,7 @@ const IndexPage = () => {
     }
 
     try {
-      const response = await fetch(`http://${apiUrl}/services/code/${countryCode}`);
+      const response = await fetch(`http://api.sanju.netbuildertraining.com/services/code/${countryCode}`);
 
       if (response.status === 404) {
         setError('Invalid country code. Please enter a valid country code.');
