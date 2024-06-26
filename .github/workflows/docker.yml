@@ -14,26 +14,6 @@ jobs:
       - name: containerise
         uses: actions/checkout@v4
 
-      # Clone backend repository
-      - name: Checkout Backend Repository
-        uses: actions/checkout@v4
-        with:
-          repository: SSG27/EXPRESS-API
-          path: backend
-
-      # Install backend dependencies
-      - name: Install Backend Dependencies
-        run: npm ci --legacy-peer-deps
-        working-directory: ./backend
-
-      # Build and push backend Docker image
-      - name: Build and Push Backend Docker Image
-        run: |
-          docker build -t sss-backend:latest ./backend
-          echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag sss-backend:latest ${{ secrets.DOCKER_USERNAME }}/sss-backend:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/sss-backend:latest
-
       # Install frontend dependencies
       - name: Install Frontend Dependencies
         run: npm ci
@@ -41,24 +21,11 @@ jobs:
       # Build and push frontend Docker image
       - name: Build and Push Frontend Docker Image
         run: |
-          docker build -t sss-frontend:latest .
+          docker build -t sss-frontend:prod .
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker tag sss-frontend:latest ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
 
-      # # Start the backend container
-      # - name: Start Backend Container
-      #   run: docker run -d -p 8000:8000 --name sss-backend ${{ secrets.DOCKER_USERNAME }}/sss-backend:latest
-
-      # # Wait for the backend to be ready
-      # - name: Wait for Backend to be Ready
-      #   run: sleep 20
-
-      # # Start the frontend container
-      # - name: Start Frontend Container
-      #   run: docker run -d -p 3000:3000 --name sss-frontend ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
-
-      # idk
       - name: Jenkins
         run: |
           CRUMB=$(curl -u ash:{{secrets.JENKINS_API_TOKEN}} -s 'https://jenkins.netbuildertraining.com/crumbIssuer/api/json' | grep -o '"crumb":"[^"]*"' | cut -d':' -f2 | tr -d '"')
