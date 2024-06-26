@@ -46,14 +46,20 @@ jobs:
           docker tag sss-frontend:latest ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
 
-      # Start the backend container
-      - name: Start Backend Container
-        run: docker run -d -p 8000:8000 --name sss-backend ${{ secrets.DOCKER_USERNAME }}/sss-backend:latest
+      # # Start the backend container
+      # - name: Start Backend Container
+      #   run: docker run -d -p 8000:8000 --name sss-backend ${{ secrets.DOCKER_USERNAME }}/sss-backend:latest
 
-      # Wait for the backend to be ready
-      - name: Wait for Backend to be Ready
-        run: sleep 20
+      # # Wait for the backend to be ready
+      # - name: Wait for Backend to be Ready
+      #   run: sleep 20
 
-      # Start the frontend container
-      - name: Start Frontend Container
-        run: docker run -d -p 3000:3000 --name sss-frontend ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
+      # # Start the frontend container
+      # - name: Start Frontend Container
+      #   run: docker run -d -p 3000:3000 --name sss-frontend ${{ secrets.DOCKER_USERNAME }}/sss-frontend:latest
+
+      # idk
+      - name: Jenkins
+        run: |
+          CRUMB=$(curl -u ash:{{secrets.JENKINS_API_TOKEN}} -s 'https://jenkins.netbuildertraining.com/crumbIssuer/api/json' | grep -o '"crumb":"[^"]*"' | cut -d':' -f2 | tr -d '"')
+          curl -u ash:{{secrets.JENKINS_API_TOKEN}} -H "Jenkins-Crumb: $CRUMB" -X POST 'https://jenkins.netbuildertraining.com/job/Sanju-deployment-pipeline/build'

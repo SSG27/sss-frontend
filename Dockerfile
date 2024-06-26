@@ -10,6 +10,8 @@ COPY . .
 
 RUN npm run build
 
+ENV API_URL = "backend.default.svc.cluster.local"
+
 EXPOSE 3000
 
 CMD ["npm", "start"]

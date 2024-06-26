@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import AdSenseAd from '@/components/AdSenseAd'; 
 import styles from '@/styles/Home.module.css';
 
 const IndexPage = () => {
@@ -8,6 +9,7 @@ const IndexPage = () => {
   const [services, setServices] = useState<{ name: string, monthlyFee: number }[]>([]);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const apiUrl = process.env.API_URL ?? 'localhost:8000';
 
   const fetchServices = async () => {
     if (!countryCode) {
@@ -16,7 +18,7 @@ const IndexPage = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/services/code/${countryCode}`);
+      const response = await fetch(`http://${apiUrl}/services/code/${countryCode}`);
 
       if (response.status === 404) {
         setError('Invalid country code. Please enter a valid country code.');
@@ -42,6 +44,7 @@ const IndexPage = () => {
 
   return (
     <div className={styles.container}>
+      <AdSenseAd slot="1122334455" style={{ width: '100%', height: '90px' }} /> {/* Horizontal Ad before heading */}
       <h1 className={styles.h1}>Search Streaming Services by Country Code</h1>
       {error && <p className={styles.error}>{error}</p>}
       {success && <p className={styles.success}>{success}</p>}

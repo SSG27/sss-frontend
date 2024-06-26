@@ -11,13 +11,14 @@ const ManageServicesPage = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [deleteMessage, setDeleteMessage] = useState('');
+  const apiUrl = process.env.API_URL ?? 'localhost:8000';
 
   useEffect(() => {
     fetchServices();
   }, []);
 
   const fetchServices = async () => {
-    const response = await fetch('http://localhost:8000/services');
+    const response = await fetch(`http://${apiUrl}/services`);
     const data = await response.json();
     setServices(data);
   };
@@ -57,7 +58,7 @@ const ManageServicesPage = () => {
       return;
     }
 
-    const response = await fetch('http://localhost:8000/services/newService', {
+    const response = await fetch(`http://${apiUrl}/services/newService`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -78,7 +79,7 @@ const ManageServicesPage = () => {
   };
 
   const deleteService = async (id: string) => {
-    const response = await fetch(`http://localhost:8000/services/${id}`, {
+    const response = await fetch(`http://${apiUrl}/services/${id}`, {
       method: 'DELETE',
     });
 

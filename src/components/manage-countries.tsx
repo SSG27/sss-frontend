@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import AdSenseAd from '@/components/AdSenseAd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import styles from '@/styles/Manage.module.css';
@@ -11,6 +12,7 @@ const ManageCountriesPage = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [deleteMessage, setDeleteMessage] = useState('');
+  const apiUrl = process.env.API_URL ?? 'localhost:8000';
 
   useEffect(() => {
     fetchCountries();
@@ -18,7 +20,7 @@ const ManageCountriesPage = () => {
 
   const fetchCountries = async () => {
     try {
-      const response = await fetch('http://localhost:8000/codes');
+      const response = await fetch(`http://${apiUrl}/codes`);
       const data = await response.json();
       setCountries(data);
     } catch (error) {
@@ -72,7 +74,7 @@ const ManageCountriesPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/codes', {
+      const response = await fetch(`http://${apiUrl}/codes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +104,7 @@ const ManageCountriesPage = () => {
 
   const deleteCountry = async (code: string) => {
     try {
-      const response = await fetch(`http://localhost:8000/codes/${code}`, {
+      const response = await fetch(`http://${apiUrl}/codes/${code}`, {
         method: 'DELETE',
       });
 
@@ -125,6 +127,7 @@ const ManageCountriesPage = () => {
 
   return (
     <div className={styles.container}>
+      <AdSenseAd slot="2233445566" style={{ width: '100%', height: '90px' }} />
       <h1 className={styles.h1}>Manage Countries</h1>
       {error && <p className={styles.error}>{error}</p>}
       {success && <p className={styles.success}>{success}</p>}
