@@ -1,0 +1,33 @@
+name: Check for Upstream Updates
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Checks every hour
+  workflow_dispatch:
+
+jobs:
+  check-updates:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v2
+
+    - name: Check for updates from upstream
+      id: check_updates
+      run: |
+        git remote add upstream https://github.com/owner/repo.git
+        git fetch upstream
+        UPSTREAM_COMMIT=$(git rev-parse upstream/main)
+        CURRENT_COMMIT=$(git rev-parse HEAD)
+        if [ "$UPSTREAM_COMMIT" != "$CURRENT_COMMIT" ]; then
+          echo "::set-output name=updates::true"
+        else
+          echo "::set-output name=updates::false"
+        fi
+
+    - name: Send Teams Notification
+      if: steps.check_updates.outputs.updates == 'true'
+      run: |
+        WEBHOOK_URL=${{ secrets.TEAMS_WEBHOOK_URL }}
+        MESSAGE="There are new updates available in the upstream repository. Please sync your fork."
+        curl -H 'Content-Type: application/json' -d "{\"text\": \"${MESSAGE}\"}" $WEBHOOK_URL
