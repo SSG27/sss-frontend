@@ -20,7 +20,7 @@ const ManageCountriesPage = () => {
 
   const fetchCountries = async () => {
     try {
-      const response = await fetch(`http://${apiUrl}/codes`);
+      const response = await fetch(`http://api.sanju.netbuildertraining.com/codes`);
       const data = await response.json();
       setCountries(data);
     } catch (error) {
@@ -74,7 +74,7 @@ const ManageCountriesPage = () => {
     }
 
     try {
-      const response = await fetch(`http://${apiUrl}/codes`, {
+      const response = await fetch(`http://api.sanju.netbuildertraining.com/codes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const ManageCountriesPage = () => {
 
   const deleteCountry = async (code: string) => {
     try {
-      const response = await fetch(`http://${apiUrl}/codes/${code}`, {
+      const response = await fetch(`http://api.sanju.netbuildertraining.com/codes/${code}`, {
         method: 'DELETE',
       });
 

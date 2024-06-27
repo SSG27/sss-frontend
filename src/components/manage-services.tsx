@@ -18,7 +18,7 @@ const ManageServicesPage = () => {
   }, []);
 
   const fetchServices = async () => {
-    const response = await fetch(`http://${apiUrl}/services`);
+    const response = await fetch(`http://api.sanju.netbuildertraining.com/services`);
     const data = await response.json();
     setServices(data);
   };
@@ -58,7 +58,7 @@ const ManageServicesPage = () => {
       return;
     }
 
-    const response = await fetch(`http://${apiUrl}/services/newService`, {
+    const response = await fetch(`http://api.sanju.netbuildertraining.com/services/newService`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const ManageServicesPage = () => {
   };
 
   const deleteService = async (id: string) => {
-    const response = await fetch(`http://${apiUrl}/services/${id}`, {
+    const response = await fetch(`http://api.sanju.netbuildertraining.com/services/${id}`, {
       method: 'DELETE',
     });
 
