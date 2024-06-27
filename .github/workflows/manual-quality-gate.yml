@@ -2,7 +2,7 @@ name: Check for Upstream Updates
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Checks every hour
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -29,5 +29,5 @@ jobs:
       if: steps.check_updates.outputs.updates == 'true'
       run: |
         WEBHOOK_URL=${{ secrets.TEAMS_WEBHOOK_URL }}
-        MESSAGE="There are new updates available in the upstream repository. Please sync your fork."
+        MESSAGE="There are new updates available in the upstream testing repository. Please visit the repo @ https://github.com/tsi-apprentice-plus/sss-frontend."
         curl -H 'Content-Type: application/json' -d "{\"text\": \"${MESSAGE}\"}" $WEBHOOK_URL
