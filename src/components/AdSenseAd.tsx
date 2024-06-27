@@ -16,7 +16,7 @@ const AdSenseAd: React.FC<{ slot: string, format?: string, layout?: string, styl
     <ins
       className="adsbygoogle"
       style={{ display: 'block', ...style }}
-      data-ad-client="ca-pub-XXXXXX" // Replace with AdSense publisher ID
+      data-ad-client="ca-pub-9915864005145670"
       data-ad-slot={slot}
       data-ad-format={format}
       data-ad-layout={layout}

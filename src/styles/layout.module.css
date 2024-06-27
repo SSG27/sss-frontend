@@ -8,8 +8,8 @@
 .main {
   flex: 1;
   padding: 20px;
-  margin-left: 120px; /* Adjusted for the left ad */
-  margin-right: 120px; /* Adjusted for the right ad */
+  margin-left: 80px; /* Adjusted for the left */
+  margin-right: 0px; /* Adjusted for the right ad */
   background-color: #1E1E2F;
 }
 
